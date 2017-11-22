@@ -1,0 +1,90 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+
+<head>
+    <meta charset="UTF-8">
+    <title>博客编辑发表页</title>
+</head>
+<style>
+    .input-option{
+        margin:50px 20px;
+    }
+    .submit{
+        margin-top:10px;
+        width:200px;
+        height:50px;
+    }
+</style>
+
+<body>
+    <h1>发表页</h1>
+    <div class='input-option'>
+        <select name="" id="type">
+            <option value="">请选择发表文章的类型</option>
+            <option value="">js</option>
+            <option value="">css</option>
+            <option value="">nodeJS</option>
+            <option value="">随笔</option>
+            <option value="">连载小说</option>
+            <option value="">php</option>
+        </select>
+        <input type="text" class='title' placeholder='输入文章标题'>
+    </div>
+    <script src='http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js'></script>
+    <!-- 加载编辑器的容器 -->
+    <script id="container" name="content" type="text/plain">
+        这里写你的初始化内容
+    </script>
+    <!-- 配置文件 -->
+    <script type="text/javascript" src="./ueditor/ueditor.config.js"></script>
+    <!-- 编辑器源码文件 -->
+    <script type="text/javascript" src="./ueditor/ueditor.all.js"></script>
+    <!-- 实例化编辑器 -->
+    <script type="text/javascript">
+        var ue = UE.getEditor('container', {
+            autoHeight: false,
+            initialFrameWidth :800,
+            initialFrameHeight :300
+        });
+        var btn = document.querySelector(".submit");
+        function submit(){
+            // html内容
+            var content = ue.getContent();
+            //标题
+            var title = document.querySelector(".title").value;
+            //文章类型
+            var select =  document.querySelector("#type");
+            var artical_index = select.selectedIndex;
+            var artical_type = select.options[artical_index].text;
+            console.log(artical_type);
+            // data = JSON.stringify(data);
+            $.ajax({
+                async:true,
+                type:"post",
+                dataType:"text",
+                url:"/myblog/submit.php",
+                data:{
+                    "title":title,
+                    "type":artical_type,
+                    "content":content
+                },
+                success:function(){
+                    console.log("发表成功！");
+                },
+                error:function(data, XMLHttpRequest, textStatus, errorThrown){  
+                    console.log(data);  
+                    console.log(XMLHttpRequest.status);  
+                    console.log(XMLHttpRequest.readyState);  
+                    console.log(textStatus);  
+                }  
+            });
+            
+        }
+        
+    </script>
+    <div>
+        <button class='submit' type ="button"  onclick="submit();">发表</button>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,58 @@
+*{
+    margin:0;
+    padding:0;
+}
+body{
+    background: #fcf9f9;
+}
+.pull-left{
+    float: left!important;
+}
+.pull-right{
+    float:right!important;
+}
+.clearfix:before{
+    display: table;
+}
+.clearfix:after{
+    content:"";
+    display: table;
+    clear:both;
+}
+header{
+    position: fixed;
+    top:0;
+    left:0;
+    width:100%;
+    padding:0 15px;
+    height:50px;
+    background: rgba(252,249,249,0.9);
+    border-bottom:1px solid rgb(148, 146, 146);
+}
+.my-word{
+    line-height: 50px;
+    color: #777;
+    font-size: 24px;
+    font-family: "Palatino Linotype", "Book Antiqua", Palatino, Helvetica, STKaiti, SimSun, serif;
+}
+.head-nav{
+    padding:0;
+    line-height: 50px;
+    margin-right:40px;
+}
+.head-nav li{
+    float: left;
+    list-style-type: none;
+    margin-left:10px;
+}
+a{
+    text-decoration: none;
+    color:#555;
+}
+ a:visited{
+    color:#555;
+}
+a:active{
+    color:#555;
+}
+
